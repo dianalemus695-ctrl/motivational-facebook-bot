@@ -1,9 +1,11 @@
-name: Facebook Bot Post
+name: Facebook Bot - 3 Posts Daily
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 15 * * *' # runs daily (UTC time)
+    - cron: '0 17 * * *'
+    - cron: '0 21 * * *'
+    - cron: '0 3 * * *'
 
 jobs:
   post:
@@ -20,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run bot
+      - name: Run Facebook bot
         env:
           PAGE_ACCESS_TOKEN: ${{ secrets.PAGE_ACCESS_TOKEN }}
           PAGE_ID: ${{ secrets.PAGE_ID }}
