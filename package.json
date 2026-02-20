@@ -1,0 +1,28 @@
+// test-facebook.js
+const fetch = require("node-fetch");
+
+// Read your environment variables
+const PAGE_ID = process.env.FACEBOOK_PAGE_ID;
+const ACCESS_TOKEN = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
+
+// Test: Get basic page info
+async function testFacebook() {
+  try {
+    const res = await fetch(
+      `https://graph.facebook.com/v17.0/${PAGE_ID}?fields=name,fan_count&access_token=${ACCESS_TOKEN}`
+    );
+    const data = await res.json();
+
+    if (data.error) {
+      console.log("Error:", data.error.message);
+    } else {
+      console.log("✅ Facebook Page Connected!");
+      console.log(`Page Name: ${data.name}`);
+      console.log(`Fans: ${data.fan_count}`);
+    }
+  } catch (err) {
+    console.log("Fetch Error:", err);
+  }
+}
+
+testFacebook();
